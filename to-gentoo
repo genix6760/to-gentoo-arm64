@@ -57,15 +57,6 @@ fi
 if [ -z "${RUNLEVEL}" ]; then
   which systemctl &>/dev/null && RUNLEVEL="systemd"
 fi
-case "${RUNLEVEL}" in
-  S | unknown | single | systemd | 1)
-    ;;
-
-  *)
-    echo "Please run this script from single-user mode: init s or openrc single or append single to kernel cmd line" >&2
-    exit 1
-  ;;
-esac
 
 FREE=$(df -m / | sed '1d' | awk '{ print $4; }')
 MIN=8000
